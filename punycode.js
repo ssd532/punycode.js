@@ -69,6 +69,7 @@ function map(array, callback) {
  * @returns {String} A new string of characters returned by the callback
  * function.
  */
+/*
 function mapDomain(domain, callback) {
 	const parts = domain.split('@');
 	let result = '';
@@ -83,6 +84,16 @@ function mapDomain(domain, callback) {
 	const labels = domain.split('.');
 	const encoded = map(labels, callback).join('.');
 	return result + encoded;
+}
+
+*/
+
+function mapDomain(emailAddress, callback) {
+	// Avoid `split(regex)` for IE8 compatibility. See #17.
+	emailAddress = emailAddress.replace(regexSeparators, '\x2E');
+	const labels = emailAddress.split('.');
+	const encoded = map(labels, callback).join('.');
+	return encoded;
 }
 
 /**
